@@ -3,31 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening App 2...</title>
+    <title>Opening App...</title>
 </head>
 <body>
 
     <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-        <h2>Connecting to Careem...</h2>
-        <p>If the app doesn't open, we'll take you to the Play Store.</p>
+        <h2>Connecting to the App...</h2>
+        <p>If you aren't redirected automatically, 
+           <a href="intent://careem.go.link#Intent;scheme=https;package=com.careem.acme;end">click here</a>.
+        </p>
     </div>
 
     <script>
         window.onload = function() {
-            // 1. We create a hidden "bridge" to try the app link
-            // This prevents the "Site Not Found" error from taking over the screen
-            var iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            iframe.src = "https://careem.go.link"; 
-            document.body.appendChild(iframe);
+            // This is the special Android Intent format
+            // 1. It tries to open the "trusted" link: careem.go.link
+            // 2. It checks for the package: com.careem.acme
+            // 3. If the app is NOT found, it automatically opens the Play Store for that package.
+            var intentUrl = "intent://careem.go.link#Intent;scheme=https;package=com.careem.acme;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.careem.acme;end";
 
-            // 2. Set the fallback to Play Store
-            // We wait 2.5 seconds to give the OS time to decide if the app is there
-            setTimeout(function() {
-                // IMPORTANT: Ensure the package name matches your app!
-                // Currently set to Careem (com.careem.acme)
-                window.location.href = "https://play.google.com/store/apps/details?id=com.careem.acme";
-            }, 2500);
+            // Trigger the intent
+            window.location.href = intentUrl;
         };
     </script>
 
