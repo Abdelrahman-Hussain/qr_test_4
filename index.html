@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening App 4...</title>
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Redirecting...</title> 
 </head>
-<body>
+<body> 
 
-    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-        <p>Opening app 4...</p>
-    </div>
-
-    <a id="app-trigger" href="https://careem.go.link" style="display:none;"></a>
+    <div class="container" style="text-align: center; padding-top: 50px; font-family: sans-serif;"> 
+        <p>Opening Instagram...</p>
+        <p style="font-size: 14px; color: #666;">
+            If nothing happens, <a href="https://play.google.com/store/apps/details?id=com.supercell.clashroyale">click here to install</a>.
+        </p>
+    </div> 
 
     <script>
         window.onload = function() {
-            var appTrigger = document.getElementById('app-trigger');
-            
-            // 1. Try to "click" the app link programmatically
-            // This is more likely to trigger "App Links" than window.location
-            appTrigger.click();
+            // 1. Attempt to open the app link
+            window.location.href = "https://careem.go.link/";
 
-            // 2. The Fallback Timer
-            // If the app is NOT installed or the link is broken, 
-            // the page stays active and triggers the Store.
+            // 2. Set a timer (2 seconds)
+            // If the app doesn't open and the browser stays on this page, 
+            // it will redirect to the Play Store.
             setTimeout(function() {
-                // If we are still on this page after 2.5 seconds, go to Play Store
                 window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
-            }, 8000);
+            }, 2000);
         };
     </script>
 
