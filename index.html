@@ -15,18 +15,20 @@
 
     <script>
         window.onload = function() {
-            // 1. Attempt to open the app link
-            window.location.href = "https://carm.go.link";
-
-            // 2. Set a timer (2 seconds)
-            // If the app doesn't open and the browser stays on this page, 
-            // it will redirect to the Play Store.
+            // Create a hidden iframe
+            var iframe = document.createElement("iframe");
+            iframe.style.display = "none";
+            iframe.src = "https://careem.go.link";
+            document.body.appendChild(iframe);
+        
+            // This timer will keep running even if the iframe fails!
             setTimeout(function() {
                 window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
-            }, 2000);
+            }, 2500);
         };
     </script>
 
 </body>
 </html>
+
 
