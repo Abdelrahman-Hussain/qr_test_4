@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Redirecting...</title> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening App 2...</title>
 </head>
-<body> 
+<body>
 
-    <div class="container" style="text-align: center; padding-top: 50px; font-family: sans-serif;"> 
-        <p>Opening app ... </p>
-        <p style="font-size: 14px; color: #666;">
-            If nothing happens, <a href="https://play.google.com/store/apps/details?id=com.supercell.clashroyale"">click here to install</a>.        </p>
-    </div> 
+    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+        <h2>Connecting to Careem...</h2>
+        <p>If the app doesn't open, we'll take you to the Play Store.</p>
+    </div>
 
     <script>
         window.onload = function() {
-            // Create a hidden iframe
+            // 1. We create a hidden "bridge" to try the app link
+            // This prevents the "Site Not Found" error from taking over the screen
             var iframe = document.createElement("iframe");
             iframe.style.display = "none";
-            iframe.src = "https://careem.go.link";
+            iframe.src = "https://careem.go.link"; 
             document.body.appendChild(iframe);
-        
-            // This timer will keep running even if the iframe fails!
+
+            // 2. Set the fallback to Play Store
+            // We wait 2.5 seconds to give the OS time to decide if the app is there
             setTimeout(function() {
-                window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
+                // IMPORTANT: Ensure the package name matches your app!
+                // Currently set to Careem (com.careem.acme)
+                window.location.href = "https://play.google.com/store/apps/details?id=com.careem.acme";
             }, 2500);
         };
     </script>
 
 </body>
 </html>
-
-
