@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening App...</title>
+    <title>Opening App 2 ...</title>
 </head>
 <body>
 
@@ -14,18 +14,23 @@
         </p>
     </div>
 
-    <script>
-        window.onload = function() {
-            // This is the special Android Intent format
-            // 1. It tries to open the "trusted" link: careem.go.link
-            // 2. It checks for the package: com.careem.acme
-            // 3. If the app is NOT found, it automatically opens the Play Store for that package.
-            var intentUrl = "intent://careem.go.link#Intent;scheme=https;package=com.careem.acme;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.careem.acme;end";
+<script>
+    window.onload = function() {
+        // Try to trigger the app
+        try {
+            window.location.href = "https://careem.go.link";
+        } catch (e) {
+            console.log("App link failed, waiting for Store redirect...");
+        }
 
-            // Trigger the intent
-            window.location.href = intentUrl;
-        };
-    </script>
+        // Force Play Store redirect after 3 seconds 
+        // (increased slightly to allow for slow DNS lookups)
+        setTimeout(function() {
+            window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
+        }, 3000);
+    };
+</script>
 
 </body>
 </html>
+
