@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Redirecting...</title> 
 </head>
-<body>
+<body> 
 
-    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-        <p>Checking for app...</p>
-    </div>
+    <div class="container" style="text-align: center; padding-top: 50px; font-family: sans-serif;"> 
+        <p>Opening app 11...</p>
+        <p style="font-size: 14px; color: #666;">
+            If nothing happens, <a href="https://play.google.com/store/apps/details?id=com.supercell.clashroyale">click here to install</a>.
+        </p> 
+    </div> 
 
     <script>
         window.onload = function() {
-            const appUrl = "https://careem.go.link";
-            const playStoreUrl = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
+            // 1. Create a hidden "bridge" to try the app link
+            // This prevents the browser from showing a "404 Not Found" page
+            var iframe = document.createElement("iframe");
+            iframe.style.display = "none";
+            iframe.src = "https://careem.go.link"; 
+            document.body.appendChild(iframe);
 
-            // 1. Try to "ping" the URL first
-            fetch(appUrl, { mode: 'no-cors' })
-                .then(() => {
-                    // Link exists or at least responded! Try to open it.
-                    window.location.href = appUrl;
-                    
-                    // 2. Secondary fallback just in case it doesn't open the app
-                    setTimeout(() => {
-                        window.location.href = playStoreUrl;
-                    }, 3000);
-                })
-                .catch(() => {
-                    // 3. The URL failed/doesn't exist. Go straight to Play Store.
-                    window.location.href = playStoreUrl;
-                });
+            // 2. The Fallback Timer
+            // This script remains active on the main page
+            setTimeout(function() {
+                // If the app didn't open, we go to the Play Store
+                window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
+            }, 2500);
         };
     </script>
 
