@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening App 2 ...</title>
+    <title>Redirecting...</title>
 </head>
 <body>
 
     <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-        <h2>Connecting to the App...</h2>
-        <p>If you aren't redirected automatically, 
-           <a href="intent://careem.go.link#Intent;scheme=https;package=com.careem.acme;end">click here</a>.
-        </p>
+        <p>Checking for app...</p>
     </div>
 
-<script>
-    window.onload = function() {
-        // Try to trigger the app
-        try {
-            window.location.href = "https://careem.go.link";
-        } catch (e) {
-            console.log("App link failed, waiting for Store redirect...");
-        }
+    <script>
+        window.onload = function() {
+            const appUrl = "https://careem.go.link";
+            const playStoreUrl = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
 
-        // Force Play Store redirect after 3 seconds 
-        // (increased slightly to allow for slow DNS lookups)
-        setTimeout(function() {
-            window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
-        }, 3000);
-    };
-</script>
+            // 1. Try to "ping" the URL first
+            fetch(appUrl, { mode: 'no-cors' })
+                .then(() => {
+                    // Link exists or at least responded! Try to open it.
+                    window.location.href = appUrl;
+                    
+                    // 2. Secondary fallback just in case it doesn't open the app
+                    setTimeout(() => {
+                        window.location.href = playStoreUrl;
+                    }, 3000);
+                })
+                .catch(() => {
+                    // 3. The URL failed/doesn't exist. Go straight to Play Store.
+                    window.location.href = playStoreUrl;
+                });
+        };
+    </script>
 
 </body>
 </html>
-
