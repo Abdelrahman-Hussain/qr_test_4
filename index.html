@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Redirecting...</title> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening App 4...</title>
 </head>
-<body> 
+<body>
 
-    <div class="container" style="text-align: center; padding-top: 50px; font-family: sans-serif;"> 
-        <p>Opening app 11...</p>
-        <p style="font-size: 14px; color: #666;">
-            If nothing happens, <a href="https://play.google.com/store/apps/details?id=com.supercell.clashroyale">click here to install</a>.
-        </p> 
-    </div> 
+    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+        <p>Opening app 4...</p>
+    </div>
+
+    <a id="app-trigger" href="https://careem.go.link" style="display:none;"></a>
 
     <script>
         window.onload = function() {
-            // 1. Create a hidden "bridge" to try the app link
-            // This prevents the browser from showing a "404 Not Found" page
-            var iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            iframe.src = "https://careem.go.link"; 
-            document.body.appendChild(iframe);
+            var appTrigger = document.getElementById('app-trigger');
+            
+            // 1. Try to "click" the app link programmatically
+            // This is more likely to trigger "App Links" than window.location
+            appTrigger.click();
 
             // 2. The Fallback Timer
-            // This script remains active on the main page
+            // If the app is NOT installed or the link is broken, 
+            // the page stays active and triggers the Store.
             setTimeout(function() {
-                // If the app didn't open, we go to the Play Store
+                // If we are still on this page after 2.5 seconds, go to Play Store
                 window.location.href = "https://play.google.com/store/apps/details?id=com.supercell.clashroyale";
-            }, 7500);
+            }, 8000);
         };
     </script>
 
 </body>
 </html>
-
